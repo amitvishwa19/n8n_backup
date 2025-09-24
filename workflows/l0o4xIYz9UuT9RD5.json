@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "n8n": {
       "main": [
@@ -720,7 +720,7 @@
       "parameters": {
         "content": "## Main workflow loop",
         "height": 435,
-        "width": 886,
+        "width": 902,
         "color": 7
       },
       "id": "c7a919dc-9695-4b41-91b5-4e6a311ee389",
@@ -938,8 +938,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        256,
-        192
+        -208,
+        -80
       ],
       "id": "dd50287d-04da-40f3-95eb-eff98e495d6a",
       "name": "Send Success Message",
@@ -965,9 +965,13 @@
       "projectId": "Jhxl57jBaP5qwf3G"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-09-24T07:08:03.000Z",
-  "versionId": "25ab6769-249f-49ca-a541-0e52cfdfbc5a"
+  "triggerCount": 1,
+  "updatedAt": "2025-09-24T07:11:12.000Z",
+  "versionId": "5a782c80-f9a3-41fd-96e0-edeb517953f7"
 }
