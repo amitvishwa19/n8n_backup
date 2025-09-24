@@ -1,0 +1,370 @@
+{
+  "active": false,
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        []
+      ]
+    },
+    "Instagram Container Id": {
+      "main": [
+        [
+          {
+            "node": "Instagram Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a post": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-09-22T11:21:25.040Z",
+  "id": "wfsWyLc1DYITjPHm",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Social Media Posts",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "843412ed-4469-49ab-9d23-ee3d22d00855",
+              "name": "node",
+              "value": "17841476586070758",
+              "type": "string"
+            },
+            {
+              "id": "3466d2bf-2a76-4509-b3d6-3a10aaab350b",
+              "name": "image_url",
+              "value": "https://2ysdv7kqqjhyq5jp.public.blob.vercel-storage.com/anshu-3-YDP7nPNr0ZX0HuCAKRhpRux7NqAaE8",
+              "type": "string"
+            },
+            {
+              "id": "b76d5bcb-6b7f-41de-9e73-527e79f1135e",
+              "name": "ai Image",
+              "value": "Generate a image boy running with dog",
+              "type": "string"
+            },
+            {
+              "id": "234ea6e5-ef6b-476e-b6b2-7aae81bbc194",
+              "name": "caption",
+              "value": "This is test posted by n8n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -784,
+        0
+      ],
+      "id": "6d26ed6b-002d-45c2-bced-04cca22974ca",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        0
+      ],
+      "id": "ee51e91a-557a-4c3d-9611-83c2604fb304",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-exp-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-exp-image-generation"
+        },
+        "prompt": "={{ $json['ai Image'] }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        -400
+      ],
+      "id": "822307a3-edeb-4d8a-be95-46f62dabc6c2",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "={{ $('Edit Fields').item.json.node }}",
+        "edge": "media",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "image_url",
+                "value": "={{ $('Edit Fields').item.json.image_url }}"
+              },
+              {
+                "name": "caption",
+                "value": "={{ $json.caption }}"
+              },
+              {
+                "name": "node",
+                "value": "={{ $json.node }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        -368
+      ],
+      "id": "c55f4a40-d69d-4461-8ec0-04cf5dad84c2",
+      "name": "Instagram Container Id",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "3f5R7zsr5etw6NBb",
+          "name": "Instagram Graph Api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Instagram Post \n",
+        "height": 224,
+        "width": 656,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        -448
+      ],
+      "typeVersion": 1,
+      "id": "4c689a38-3f88-499d-b3be-12720174bc6f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "me",
+        "edge": "photos",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "This is a facebook test post via n8n"
+              },
+              {
+                "name": "url",
+                "value": "={{ $json.image_url }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        -128
+      ],
+      "id": "038b221e-e06d-4c56-8fa6-dab29c48c61a",
+      "name": "Facebook Post",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "BphHZ9u4Ft3jaHby",
+          "name": "Facebook Devlomatix"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "={{ $('Edit Fields').item.json.node }}",
+        "edge": "media_publish",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "image_url",
+                "value": "={{ $('Edit Fields').item.json.image_url }}"
+              },
+              {
+                "name": "caption",
+                "value": "={{ $('Edit Fields').item.json.caption }}"
+              },
+              {
+                "name": "creation_id",
+                "value": "={{ $json.id }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -368
+      ],
+      "id": "059e372a-f4a6-4e66-ba48-0f44ddf72f82",
+      "name": "Instagram Graph API",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "3f5R7zsr5etw6NBb",
+          "name": "Instagram Graph Api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Facebook Post \n",
+        "height": 208,
+        "width": 656
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        -192
+      ],
+      "typeVersion": 1,
+      "id": "449ab243-3d70-4aed-becc-acc05a75a295",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "postAs": "organization",
+        "organization": "109130964",
+        "text": "={{ $json.caption }} sfsssfsf",
+        "shareMediaCategory": "IMAGE",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        112
+      ],
+      "id": "a1538422-a6e7-4d3d-ae5b-c139d7407490",
+      "name": "Create a post",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "o0BohJR0Ns23meJd",
+          "name": "LinkedIn account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## LinkedIn Post\n",
+        "height": 208,
+        "width": 656,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        48
+      ],
+      "typeVersion": 1,
+      "id": "c8cafe11-5c27-40ff-b335-f85dd074c612",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.caption }} to",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        352
+      ],
+      "id": "fbb2cdfb-5671-4d35-86fd-87e2574463a2",
+      "name": "Create Tweet",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "ieOvu48PdErHusT7",
+          "name": "X account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## X Post",
+        "height": 208,
+        "width": 656,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        288
+      ],
+      "typeVersion": 1,
+      "id": "35eb6d41-7569-424e-974d-ca1f995f9c79",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-22T11:21:25.049Z",
+      "updatedAt": "2025-09-22T11:21:25.049Z",
+      "role": "workflow:owner",
+      "workflowId": "wfsWyLc1DYITjPHm",
+      "projectId": "Jhxl57jBaP5qwf3G"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-23T13:55:37.000Z",
+  "versionId": "6febae32-828e-40c3-a48f-b5677a7364b8"
+}
