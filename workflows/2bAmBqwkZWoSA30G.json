@@ -1,0 +1,147 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Idea Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Idea Generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-22T08:16:42.890Z",
+  "id": "2bAmBqwkZWoSA30G",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Social Media Agent",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1072,
+        -160
+      ],
+      "id": "d58903a8-b592-4877-be99-a2484dfb5f1b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1uhsfYjsEuumRkt1SmwXehoAT1ik5DKQBF7mqZO6PMf0",
+          "mode": "list",
+          "cachedResultName": "Post Ideas",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uhsfYjsEuumRkt1SmwXehoAT1ik5DKQBF7mqZO6PMf0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uhsfYjsEuumRkt1SmwXehoAT1ik5DKQBF7mqZO6PMf0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -864,
+        -160
+      ],
+      "id": "fd9ba2aa-7c51-4b4f-b777-0179cd3b2fee",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "74HDWwhLJT4BhvXj",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        64
+      ],
+      "id": "d7b598b7-5109-43ca-92aa-d65ecea7730e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate materials for my next LinkedIn post.\n\nHere are the topic that we've to use: {{ $json.Input }}.\n\nCome up with a new, super valuable and concrete post, and prepare all the needed materials for it:\n- idea\n- title\n- text\n- image description\n\n\n\nBegin:",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=ROLE: You're an expert in viral LinkedIn posts content creation with 10 years of experience. You've created viral posts that have gotten 10 billion views in total.\n\nOBJECTIVE: Your goal is to write a 1) name, 2) idea, 3) title, 4) text, and 5) image description for my next LinkedIn Post. They should be super valuable to my audience.\n\nSCENARIO: I run a LinkedIn blog about marketing and sales. My audience is marketers, salespeople, founders, B2B business owners, B2C business owners, brands. My goal is to help them build better brands with valuable, and practical content. \nI have 4 main buckets of content on my page:\n1) timeless principles. ideas for this videos are taken from timeless books: Influnece and Pre-Suasion by Robert Cialdini, $100M Leads and $100M Offers by Alex Hormozi, Ogilvy on Advertising.\n2) case studies. for instance a case study breaking down on of the famous ads from the latest SuperBowl.\n3) growth hacks. latest trends on how to grow with a proof. for instance an SEO tactic that became known in the last year.\n4) contraversial ads. breakdowns of interesting and famous contraversial ads.\nEvery video that I post is focused solely on one of the content buckets. That makes my content more diverse and covering more cool topics.\n\nEXPECTATION: Write me 1) name (short name for the post, less than 50 characters), 2) idea (detailed description in 3 sentences max), 3) title (the first sentence of the post, less than 80 characters, it should be ultra hooking), 4) full text of the post, 5) image description (the image is the first thing people will look at, so make it ultra hooking; write the image description to be super clear and ultra simple, so the AI image generator will precisely know that to generate; the image should be minimalistic) for a 200-300 words LinkedIn post from one of the content buckets described above.\nMake sure to have great: hook, retention, and reward at the end.\nThe post should clearly lead to a marketing/sales insight.\nYour output should be in the JSON format.\nIdea should always start with a category: Timeless principle, Case study, Growth hack, Contraversial ad.\nExample output:\n{\"name\": \"The Power of Social Proof\",\n\"idea\": \"Timeless principle: Social proof is a psychological phenomenon that influences decision-making by showing how others' actions affect our own choices. It works universally across physical spaces and digital platforms. Marketers who strategically implement social proof elements can significantly increase conversion rates and customer trust.\",\n\"title\": \"Why we can't resist looking up when others do (and what it means for sales)\",\n\"text\": \"Why we can't resist looking up when others do (and what it means for sales)\\n\\nA psychology experiment once placed actors on a street corner to stare upward at nothing.\\n\\nWithin minutes, dozens of passersby stopped to look up too.\\n\\nThis is social proof in action—our natural tendency to follow others when uncertain.\\n\\nIn marketing, this same principle powers your conversion rates.\\n\\nNotice how differently you perceive:\\n\\n• A product with 5,000+ five-star reviews\\n• A service used by \\\"67% of Fortune 500 companies\\\"\\n• A landing page showing \\\"10,000+ satisfied customers\\\"\\n\\nCompared to identical offerings without these trust signals.\\n\\nBut here's what many marketers miss: social proof must feel authentic to work.\\n\\nGeneric testimonials or inflated numbers create skepticism, not confidence.\\n\\nThe most effective social proof strategies I've implemented for clients:\\n\\n1. Specificity: \\\"503 marketing agencies use our platform daily\\\" beats \\\"Hundreds of satisfied customers\\\"\\n\\n2. Relevance: Highlight testimonials from users who match your prospect's profile\\n\\n3. Recency: Fresh testimonials outperform older ones by 35% in our tests\\n\\n4. Visibility: Place social proof elements near decision points (like \\\"Buy Now\\\" buttons)\\n\\nImplement these four tactics, and you'll see the same psychological force that makes us look up at the sky work to increase your conversion rates.\\n\\nWhat's your most effective social proof strategy? Share below.\",\n\"image\": \"Simple black background with grainy texture. Six basic stick figure silhouettes in white - five figures on the left all looking up, one figure on the right just starting to look up. Bold text in Inter Bold font at the center reads \\\"FOLLOW THE CROWD\\\" with \\\"FOLLOW\\\" in white and \\\"CROWD\\\" in light green (#cff150). No other elements or details. Clean, minimal design with plenty of empty space.\"}\nNOTES:\n- THE BACKGROUND OF THE IMAGE SHOULD ALWAYS BE BLACK AND DARK GRAINY FILM\nTo accomplish your task you can use the web search."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -592,
+        -160
+      ],
+      "id": "9d4ff102-7c6b-4e06-afc5-4325de65638b",
+      "name": "Idea Generator",
+      "retryOnFail": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-22T08:16:42.897Z",
+      "updatedAt": "2025-09-22T08:16:42.897Z",
+      "role": "workflow:owner",
+      "workflowId": "2bAmBqwkZWoSA30G",
+      "projectId": "Jhxl57jBaP5qwf3G"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-22T08:25:17.000Z",
+  "versionId": "040c463e-0f1a-4e40-8973-5644f7b3d255"
+}
