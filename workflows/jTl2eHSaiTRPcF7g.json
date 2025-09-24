@@ -1,0 +1,527 @@
+{
+  "active": false,
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Facebook Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Linkedin Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Insta Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Facebook Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Linkedin Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Insta Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model in Google Gemini": {
+      "ai_tool": [
+        [
+          {
+            "node": "Facebook Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Linkedin Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Insta Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Facebook Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Linkedin Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Insta Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Linkedin Agent": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Agent": {
+      "main": [
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insta Agent": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-22T06:00:49.101Z",
+  "id": "jTl2eHSaiTRPcF7g",
+  "isArchived": false,
+  "meta": null,
+  "name": "Social M Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        576
+      ],
+      "id": "2e0d537f-9d74-46f3-a9ae-6c4825851511",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-exp-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-exp-image-generation"
+        },
+        "prompt": "=create a natural resemling image about topic {{ $json.output }} ",
+        "options": {
+          "sampleCount": 1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        464,
+        128
+      ],
+      "id": "e0eb6701-518b-4286-aad9-c7195a2a57ea",
+      "name": "Generate an image"
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "15UOGs9JJqbtfeXH6_gMY_lIlrpw9ZyvR",
+          "mode": "list",
+          "cachedResultName": "Social media assets",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/15UOGs9JJqbtfeXH6_gMY_lIlrpw9ZyvR"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        624,
+        128
+      ],
+      "id": "3f0e2000-d01e-4b36-9a1d-b25e2848cae5",
+      "name": "Upload file"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto",
+          "mode": "list",
+          "cachedResultName": "Devlomatix Solutions Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 27103859,
+          "mode": "list",
+          "cachedResultName": "SocialMediaPost",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit#gid=27103859"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Pending",
+            "Topic": "={{ $('When chat message received').item.json.chatInput }}",
+            "Date": "={{$now.format('dd-MM-yyyy')}}"
+          },
+          "matchingColumns": [
+            "Topic"
+          ],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Instagram content",
+              "displayName": "Instagram content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Facebook Content",
+              "displayName": "Facebook Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Linkedin Content",
+              "displayName": "Linkedin Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Image Link",
+              "displayName": "Image Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Preview",
+              "displayName": "Preview",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1376,
+        112
+      ],
+      "id": "9ca4fd23-6cfe-46b9-b7e0-bec2139a8098",
+      "name": "Append or update row in sheet"
+    },
+    {
+      "parameters": {
+        "collectionName": "social media"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        144,
+        576
+      ],
+      "id": "0d39b40e-4196-4e51-a27d-a7957dea3b35",
+      "name": "MongoDB Chat Memory"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-1.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-1.5-flash"
+        },
+        "messages": {
+          "values": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGeminiTool",
+      "typeVersion": 1,
+      "position": [
+        288,
+        576
+      ],
+      "id": "7203ae56-800e-491a-8a87-e67611c2615b",
+      "name": "Message a model in Google Gemini"
+    },
+    {
+      "parameters": {
+        "url": "https://gnews.io/api/v4/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.chatInput }}"
+            },
+            {
+              "name": "lanh",
+              "value": "en"
+            },
+            {
+              "name": "max2"
+            },
+            {
+              "name": "apikey",
+              "value": "a77a9411857dec34e3a7e176f61015f8"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -176,
+        -64
+      ],
+      "id": "87a1a26c-bdaa-46e5-8565-2c92fd0aade2",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -112,
+        160
+      ],
+      "id": "f088cf4c-86bc-480f-afb7-66c1ac5e36c5",
+      "name": "When chat message received",
+      "webhookId": "7032fb14-8716-4bfd-930f-4bfd0f200283"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841476586070758",
+        "edge": "media",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "image_url",
+                "value": "={{ $json['Image Link'] }}"
+              },
+              {
+                "name": "node",
+                "value": "17841476586070758"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        112
+      ],
+      "id": "f9099716-d550-45cb-bd92-16fcbc74baeb",
+      "name": "Facebook Graph API",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Generate article sutitable for linkedin post"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        144,
+        -16
+      ],
+      "id": "7e7a5a14-3bae-4202-9947-f83272aef104",
+      "name": "Linkedin Agent"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "create suitable for facebook post, Shorter and more concise"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        144,
+        128
+      ],
+      "id": "826bc260-0721-4e00-8c01-bb0841bf86e0",
+      "name": "Facebook Agent"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "create very short article and  hash tags for same for instagram"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        336
+      ],
+      "id": "97a74a4b-23a7-42bc-8162-848afe32499a",
+      "name": "Insta Agent"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-22T06:00:49.107Z",
+      "updatedAt": "2025-09-22T06:00:49.107Z",
+      "role": "workflow:owner",
+      "workflowId": "jTl2eHSaiTRPcF7g",
+      "projectId": "Jhxl57jBaP5qwf3G"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-22T06:00:49.101Z",
+  "versionId": "60bbb012-a2b8-4ca7-bfaa-fa1bc5ba7a57"
+}
