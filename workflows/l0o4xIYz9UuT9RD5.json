@@ -828,8 +828,7 @@
           "id": "bbmcSokLK6Dm4sdi",
           "name": "GitHub account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -935,6 +934,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T07:00:52.000Z",
-  "versionId": "9afe3336-4427-4052-b4da-44ea329b78e7"
+  "updatedAt": "2025-09-24T07:05:16.000Z",
+  "versionId": "7c90747d-7e13-4f39-87d6-cdb48dfc6515"
 }
