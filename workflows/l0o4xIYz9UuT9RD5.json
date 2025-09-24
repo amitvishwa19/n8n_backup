@@ -121,6 +121,11 @@
             "node": "Check for Readme",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Send Success Message",
+            "type": "main",
+            "index": 0
           }
         ],
         [
@@ -788,7 +793,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        528,
+        448,
         48
       ],
       "id": "317ad4fa-d3f1-49a2-a930-de2b2a9d00da",
@@ -817,7 +822,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        320,
+        256,
         48
       ],
       "id": "6f6a74f7-9da9-455e-8db3-f04d38058ba7",
@@ -852,7 +857,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        816,
+        736,
         160
       ],
       "id": "5d178047-f8d3-4595-8f8d-7cea05fec79b",
@@ -888,7 +893,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        816,
+        736,
         -16
       ],
       "id": "8465565b-6076-4d41-9926-d9a638effc4b",
@@ -910,12 +915,41 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        288,
+        208,
         -96
       ],
       "typeVersion": 1,
       "id": "2a60b694-6e52-4a28-81e6-91a25a38c8a3",
       "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "user",
+        "user": {
+          "__rl": true,
+          "value": "U05BZ940QSG",
+          "mode": "list",
+          "cachedResultName": "devlomatix"
+        },
+        "text": "=Backup done at {{$now.format('dd-MM-yyyy T')}}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        256,
+        192
+      ],
+      "id": "dd50287d-04da-40f3-95eb-eff98e495d6a",
+      "name": "Send Success Message",
+      "webhookId": "960e06b8-d81d-4782-914f-895cee4ca540",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "Y3dMRydYavtifKNr",
+          "name": "Slack account 2"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -934,6 +968,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T07:05:16.000Z",
-  "versionId": "7c90747d-7e13-4f39-87d6-cdb48dfc6515"
+  "updatedAt": "2025-09-24T07:08:03.000Z",
+  "versionId": "25ab6769-249f-49ca-a541-0e52cfdfbc5a"
 }
