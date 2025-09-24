@@ -1,0 +1,152 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-23T07:45:56.932Z",
+  "id": "Aovs2uQE4n1RExB9",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -576,
+        -112
+      ],
+      "id": "25a46409-182e-4bdb-8f03-4436b5ddfbe4",
+      "name": "When chat message received",
+      "webhookId": "b4c84e45-9bcc-4943-9034-9a4af78c0c7c"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        -112
+      ],
+      "id": "b5d770c2-9194-4e01-95eb-55193c364294",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -512,
+        96
+      ],
+      "id": "8b000a24-012c-4adf-888c-946a14543242",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        96
+      ],
+      "id": "f80c8471-5200-4376-85f9-b0fd1b18f22b",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "JgOFDGzcysLCyxsN",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -368,
+        96
+      ],
+      "id": "d3ae6365-439c-4706-ad61-e053b94b2c5c",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-23T07:45:56.943Z",
+      "updatedAt": "2025-09-23T07:45:56.943Z",
+      "role": "workflow:owner",
+      "workflowId": "Aovs2uQE4n1RExB9",
+      "projectId": "Jhxl57jBaP5qwf3G"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-23T07:45:56.932Z",
+  "versionId": "36fe97df-8a2e-46cb-b292-10b5fb155c86"
+}
