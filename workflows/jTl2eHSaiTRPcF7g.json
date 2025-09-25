@@ -46,13 +46,7 @@
     },
     "Append or update row in sheet": {
       "main": [
-        [
-          {
-            "node": "Facebook Graph API",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "MongoDB Chat Memory": {
@@ -169,7 +163,13 @@
         576
       ],
       "id": "2e0d537f-9d74-46f3-a9ae-6c4825851511",
-      "name": "Google Gemini Chat Model"
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -192,7 +192,13 @@
         128
       ],
       "id": "e0eb6701-518b-4286-aad9-c7195a2a57ea",
-      "name": "Generate an image"
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -220,7 +226,13 @@
         128
       ],
       "id": "3f0e2000-d01e-4b36-9a1d-b25e2848cae5",
-      "name": "Upload file"
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0wlnP7OGXNDie77O",
+          "name": "Google Drive account"
+        }
+      }
     },
     {
       "parameters": {
@@ -342,7 +354,13 @@
         112
       ],
       "id": "9ca4fd23-6cfe-46b9-b7e0-bec2139a8098",
-      "name": "Append or update row in sheet"
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "74HDWwhLJT4BhvXj",
+          "name": "Google Sheets account"
+        }
+      }
     },
     {
       "parameters": {
@@ -355,7 +373,13 @@
         576
       ],
       "id": "0d39b40e-4196-4e51-a27d-a7957dea3b35",
-      "name": "MongoDB Chat Memory"
+      "name": "MongoDB Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "cSvAxq4NzsUTI3mZ",
+          "name": "MongoDB account"
+        }
+      }
     },
     {
       "parameters": {
@@ -379,7 +403,13 @@
         576
       ],
       "id": "7203ae56-800e-491a-8a87-e67611c2615b",
-      "name": "Message a model in Google Gemini"
+      "name": "Message a model in Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -469,8 +499,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        144,
-        -16
+        288,
+        -48
       ],
       "id": "7e7a5a14-3bae-4202-9947-f83272aef104",
       "name": "Linkedin Agent"
@@ -522,6 +552,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-22T06:00:49.101Z",
-  "versionId": "60bbb012-a2b8-4ca7-bfaa-fa1bc5ba7a57"
+  "updatedAt": "2025-09-25T07:30:48.000Z",
+  "versionId": "88f3d68d-3fc3-4645-9e91-f642a55a0182"
 }
