@@ -3,24 +3,12 @@
   "connections": {
     "Edit Fields": {
       "main": [
-        [
-          {
-            "node": "Instagram Container Id",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "When clicking ‘Execute workflow’": {
       "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Generate an image": {
@@ -42,6 +30,72 @@
     "Create a post": {
       "main": [
         []
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Instagram agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Instagram agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -88,8 +142,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -784,
-        0
+        -768,
+        -400
       ],
       "id": "6d26ed6b-002d-45c2-bced-04cca22974ca",
       "name": "Edit Fields"
@@ -99,8 +153,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -976,
-        0
+        -1136,
+        -416
       ],
       "id": "ee51e91a-557a-4c3d-9611-83c2604fb304",
       "name": "When clicking ‘Execute workflow’"
@@ -353,6 +407,130 @@
       "typeVersion": 1,
       "id": "35eb6d41-7569-424e-974d-ca1f995f9c79",
       "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "as",
+        "options": {
+          "systemMessage": "=You are a helpful assistant,you have to create an article bae on the input {{ $json.chatInput }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -1248,
+        -64
+      ],
+      "id": "ea359ee0-f79a-446d-a521-bb0fae2cb4f3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1360,
+        240
+      ],
+      "id": "42f8988c-ff38-42d8-aaf5-428e74ab2bbd",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1424,
+        -64
+      ],
+      "id": "79794a93-100b-4596-84a9-6ddee012408a",
+      "name": "When chat message received",
+      "webhookId": "df574b8e-7b27-4775-96da-7af9d3794b31"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        240
+      ],
+      "id": "3adeece6-3e13-442f-b5e7-759c99c203dd",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "JgOFDGzcysLCyxsN",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "collectionName": "n8n_social_agent"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        240
+      ],
+      "id": "17d5d67f-0eea-4fbe-aef1-e44e7c197e9b",
+      "name": "MongoDB Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "cSvAxq4NzsUTI3mZ",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "options": {
+          "systemMessage": "create short post for instagram"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -768,
+        -144
+      ],
+      "id": "4a3e1fc4-befc-432c-9ea0-68902dd659f8",
+      "name": "Instagram agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -816,
+        48
+      ],
+      "id": "84f1c6b2-f06d-4752-bdee-89a0fa27eac3",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -371,6 +549,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-25T03:11:11.000Z",
-  "versionId": "3e05b5b9-4646-4059-bfd8-92174a319b72"
+  "updatedAt": "2025-09-25T06:23:46.000Z",
+  "versionId": "6b44d19a-c838-4e24-bb66-40a92a6e4dc9"
 }
