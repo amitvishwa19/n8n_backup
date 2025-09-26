@@ -92,11 +92,6 @@
             "node": "Linkedin Agent",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Generate an image",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -209,8 +204,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        -752,
-        528
+        -560,
+        464
       ],
       "id": "822307a3-edeb-4d8a-be95-46f62dabc6c2",
       "name": "Generate an image",
@@ -595,6 +590,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-25T11:18:15.000Z",
-  "versionId": "b8acfbca-363d-436e-b291-c0b6b46c6c8a"
+  "updatedAt": "2025-09-26T04:16:50.000Z",
+  "versionId": "72a13523-50d9-4cdf-90d2-f18bf1819025"
 }
