@@ -55,13 +55,7 @@
     },
     "When chat message received": {
       "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "SerpAPI": {
@@ -171,6 +165,50 @@
       ]
     },
     "Facebook Post2": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
       "main": [
         [
           {
@@ -466,7 +504,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $json.chatInput }}",
+        "text": "={{ $json.Topic }}",
         "options": {
           "systemMessage": "=You are a helpful assistant,you have to create an article based on the input  in the format below\n\n\n#title\n#Description\n#Content\n\n\n\n\n{{ $json.chatInput }}"
         }
@@ -506,8 +544,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.3,
       "position": [
-        -1424,
-        -64
+        -1936,
+        -608
       ],
       "id": "79794a93-100b-4596-84a9-6ddee012408a",
       "name": "When chat message received",
@@ -534,6 +572,8 @@
     },
     {
       "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "sd",
         "collectionName": "n8n_social_agent"
       },
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
@@ -572,7 +612,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are a LinkedIn post writer. You will be given a title and your task is to\ncreate an\nengaging LinkedIn post based on that title.\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 3-4 paragraphs of informative content\n3.\nEnd with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for LinkedIn (under 3000 characters)\nNow, create a LinkedIn post based on the following title:\n\n{{ $json.output }}",
+        "text": "=You are a LinkedIn post writer. You will be given a title and your task is to\ncreate an engaging LinkedIn post based on that title.\n\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 3-4 paragraphs of informative content\n3.End with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\n\n\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for LinkedIn (under 3000 characters)\n\nNow, create a LinkedIn post based on the following title:{{ $json.output }}\n\n\n\n",
         "hasOutputParser": true,
         "options": {}
       },
@@ -619,11 +659,12 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Topic": "={{ $('When chat message received').item.json.chatInput }}",
+            "Topic": "={{ $('Google Sheets Trigger').item.json.Topic }}",
             "Date": "={{$now.format('dd-MM-yyyy T')}}",
             "Instagram content": "={{ $json.output.post }}",
             "Facebook Content": "={{ $json.output.post }}",
-            "Linkedin Content": "={{ $json.output.post }}"
+            "Linkedin Content": "={{ $json.output.post }}",
+            "Image Link": "={{ $json.webViewLink }}"
           },
           "matchingColumns": [
             "Topic"
@@ -692,7 +733,7 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true,
-              "removed": true
+              "removed": false
             },
             {
               "id": "Status",
@@ -723,8 +764,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -384,
-        -320
+        48,
+        336
       ],
       "id": "fa56c031-17cb-4db8-974e-5574883085a5",
       "name": "Append or update row in sheet",
@@ -750,7 +791,7 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        -416,
+        -496,
         -64
       ],
       "id": "12af8262-3840-45d1-89e2-2a59380646a5",
@@ -778,29 +819,111 @@
         -192
       ],
       "id": "b37acf25-f799-40fb-8803-4c7bc815d777",
-      "name": "Facebook Post2"
+      "name": "Facebook Post2",
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "trigger": [
-          "message"
-        ],
-        "channelId": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
           "__rl": true,
+          "value": "1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto",
           "mode": "list",
-          "value": ""
+          "cachedResultName": "Devlomatix Solutions Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 27103859,
+          "mode": "list",
+          "cachedResultName": "SocialMediaPost",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit#gid=27103859"
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.slackTrigger",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        -176,
-        240
+        -1776,
+        -48
       ],
-      "id": "9f202c11-ee38-4081-98e9-69bd9f2c08bc",
-      "name": "Slack Trigger",
-      "webhookId": "16cb92a5-36f1-44e7-953b-60fb0b7457d1"
+      "id": "d0a616d2-4abb-4461-b2f1-0b3eecd49885",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "mAQDFzYBfDQLg2Qv",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67b38588-3e98-483d-9748-7955fa4e5130",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "Ready to Post",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1600,
+        -48
+      ],
+      "id": "4bb722aa-5248-4bd7-90cf-497ac13026aa",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Google Sheets Trigger').item.json.Topic }}.png",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1CboVLjhQRKftZj2SUpoAEH-kz29JRXLj",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -288,
+        -64
+      ],
+      "id": "1021c1bd-0887-4200-9712-cf145788a334",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0wlnP7OGXNDie77O",
+          "name": "Google Drive account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -819,6 +942,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T06:15:39.000Z",
-  "versionId": "09b7fb65-b03a-4852-a982-9ea9f8255eb0"
+  "updatedAt": "2025-09-26T07:43:49.000Z",
+  "versionId": "8f7294da-3c2a-4ee0-9065-2e9d2e7cf4b1"
 }
