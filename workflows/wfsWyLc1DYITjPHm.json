@@ -11,11 +11,6 @@
         []
       ]
     },
-    "Generate an image": {
-      "main": [
-        []
-      ]
-    },
     "Instagram Container Id": {
       "main": [
         [
@@ -49,6 +44,11 @@
             "node": "Instagram agent",
             "type": "ai_languageModel",
             "index": 0
+          },
+          {
+            "node": "Facebook Post2",
+            "type": "ai_languageModel",
+            "index": 0
           }
         ]
       ]
@@ -77,7 +77,23 @@
     },
     "MongoDB Chat Memory": {
       "ai_memory": [
-        []
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Linkedin Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Facebook Post2",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
       ]
     },
     "AI Agent": {
@@ -92,6 +108,16 @@
             "node": "Linkedin Agent",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Facebook Post2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -100,7 +126,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -109,7 +135,13 @@
     },
     "Linkedin Agent": {
       "main": [
-        []
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Structured Output Parser": {
@@ -123,6 +155,27 @@
           {
             "node": "Instagram agent",
             "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "Facebook Post2",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Facebook Post2": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
             "index": 0
           }
         ]
@@ -172,8 +225,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -512,
-        -384
+        -1344,
+        -592
       ],
       "id": "6d26ed6b-002d-45c2-bced-04cca22974ca",
       "name": "Edit Fields"
@@ -188,33 +241,6 @@
       ],
       "id": "ee51e91a-557a-4c3d-9611-83c2604fb304",
       "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "resource": "image",
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.0-flash-exp-image-generation",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-exp-image-generation"
-        },
-        "prompt": "={{ $json.output.post }}",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [
-        -560,
-        464
-      ],
-      "id": "822307a3-edeb-4d8a-be95-46f62dabc6c2",
-      "name": "Generate an image",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "y8LeZoihkeXRP0IK",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
     },
     {
       "parameters": {
@@ -244,8 +270,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        -96,
-        -384
+        448,
+        -400
       ],
       "id": "c55f4a40-d69d-4461-8ec0-04cf5dad84c2",
       "name": "Instagram Container Id",
@@ -265,8 +291,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -176,
-        -448
+        368,
+        -464
       ],
       "typeVersion": 1,
       "id": "4c689a38-3f88-499d-b3be-12720174bc6f",
@@ -296,8 +322,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        -96,
-        -128
+        448,
+        -144
       ],
       "id": "038b221e-e06d-4c56-8fa6-dab29c48c61a",
       "name": "Facebook Post",
@@ -336,8 +362,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        112,
-        -384
+        656,
+        -400
       ],
       "id": "059e372a-f4a6-4e66-ba48-0f44ddf72f82",
       "name": "Instagram Graph API",
@@ -356,8 +382,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -176,
-        -192
+        368,
+        -208
       ],
       "typeVersion": 1,
       "id": "449ab243-3d70-4aed-becc-acc05a75a295",
@@ -373,8 +399,8 @@
       "type": "n8n-nodes-base.linkedIn",
       "typeVersion": 1,
       "position": [
-        -96,
-        112
+        448,
+        96
       ],
       "id": "a1538422-a6e7-4d3d-ae5b-c139d7407490",
       "name": "Create a post",
@@ -394,8 +420,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -176,
-        48
+        368,
+        32
       ],
       "typeVersion": 1,
       "id": "c8cafe11-5c27-40ff-b335-f85dd074c612",
@@ -409,8 +435,8 @@
       "type": "n8n-nodes-base.twitter",
       "typeVersion": 2,
       "position": [
-        -80,
-        352
+        464,
+        336
       ],
       "id": "fbb2cdfb-5671-4d35-86fd-87e2574463a2",
       "name": "Create Tweet",
@@ -430,8 +456,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -176,
-        288
+        368,
+        272
       ],
       "typeVersion": 1,
       "id": "35eb6d41-7569-424e-974d-ca1f995f9c79",
@@ -461,7 +487,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -1424,
+        -1664,
         528
       ],
       "id": "42f8988c-ff38-42d8-aaf5-428e74ab2bbd",
@@ -494,7 +520,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
       "typeVersion": 1,
       "position": [
-        -1088,
+        -1328,
         528
       ],
       "id": "3adeece6-3e13-442f-b5e7-759c99c203dd",
@@ -513,7 +539,7 @@
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
       "typeVersion": 1,
       "position": [
-        -1248,
+        -1488,
         528
       ],
       "id": "17d5d67f-0eea-4fbe-aef1-e44e7c197e9b",
@@ -553,7 +579,7 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        -864,
+        -880,
         112
       ],
       "id": "ccfc3c6f-eaf8-49a6-8756-27276276f519",
@@ -567,11 +593,214 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        -944,
+        -1184,
         528
       ],
       "id": "05086286-6580-4e44-a4bd-1d7112108396",
       "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto",
+          "mode": "list",
+          "cachedResultName": "Devlomatix Solutions Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 27103859,
+          "mode": "list",
+          "cachedResultName": "SocialMediaPost",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit#gid=27103859"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Topic": "={{ $('When chat message received').item.json.chatInput }}",
+            "Date": "={{$now.format('dd-MM-yyyy T')}}",
+            "Instagram content": "={{ $json.output.post }}",
+            "Facebook Content": "={{ $json.output.post }}",
+            "Linkedin Content": "={{ $json.output.post }}"
+          },
+          "matchingColumns": [
+            "Topic"
+          ],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Instagram content",
+              "displayName": "Instagram content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Facebook Content",
+              "displayName": "Facebook Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Linkedin Content",
+              "displayName": "Linkedin Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "X Content",
+              "displayName": "X Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Link",
+              "displayName": "Image Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Preview",
+              "displayName": "Preview",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -384,
+        -320
+      ],
+      "id": "fa56c031-17cb-4db8-974e-5574883085a5",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "74HDWwhLJT4BhvXj",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-preview-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-preview-image-generation"
+        },
+        "prompt": "=Create an image based on the topic , it should be realistic\n{{ $json.output }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        -64
+      ],
+      "id": "12af8262-3840-45d1-89e2-2a59380646a5",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Facebook post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 2-4 paragraph of informative content\n3.\nEnd with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for Facebook (under 500 characters)\nNow, create a Facebook post based on the following title:\n\n{{ $json.output }}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": ""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -880,
+        -192
+      ],
+      "id": "b37acf25-f799-40fb-8803-4c7bc815d777",
+      "name": "Facebook Post2"
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "message"
+        ],
+        "channelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        240
+      ],
+      "id": "9f202c11-ee38-4081-98e9-69bd9f2c08bc",
+      "name": "Slack Trigger",
+      "webhookId": "16cb92a5-36f1-44e7-953b-60fb0b7457d1"
     }
   ],
   "pinData": {},
@@ -590,6 +819,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T04:16:50.000Z",
-  "versionId": "72a13523-50d9-4cdf-90d2-f18bf1819025"
+  "updatedAt": "2025-09-26T06:15:39.000Z",
+  "versionId": "09b7fb65-b03a-4852-a982-9ea9f8255eb0"
 }
