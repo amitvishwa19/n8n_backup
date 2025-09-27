@@ -49,6 +49,11 @@
             "node": "Facebook Post2",
             "type": "ai_languageModel",
             "index": 0
+          },
+          {
+            "node": "Twitter Agent",
+            "type": "ai_languageModel",
+            "index": 0
           }
         ]
       ]
@@ -63,6 +68,11 @@
         [
           {
             "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Twitter Agent",
             "type": "ai_tool",
             "index": 0
           }
@@ -84,6 +94,11 @@
           },
           {
             "node": "Facebook Post2",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "Twitter Agent",
             "type": "ai_memory",
             "index": 0
           }
@@ -109,12 +124,12 @@
             "index": 0
           },
           {
-            "node": "Generate an image",
+            "node": "Twitter Agent",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Append or update row in sheet",
+            "node": "Generate an image",
             "type": "main",
             "index": 0
           }
@@ -125,7 +140,7 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Edit Fields1",
             "type": "main",
             "index": 0
           }
@@ -136,7 +151,7 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Edit Fields1",
             "type": "main",
             "index": 0
           }
@@ -160,6 +175,11 @@
             "node": "Facebook Post2",
             "type": "ai_outputParser",
             "index": 0
+          },
+          {
+            "node": "Twitter Agent",
+            "type": "ai_outputParser",
+            "index": 0
           }
         ]
       ]
@@ -173,7 +193,7 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Edit Fields1",
             "type": "main",
             "index": 0
           }
@@ -217,7 +237,7 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Edit Fields1",
             "type": "main",
             "index": 0
           }
@@ -227,6 +247,39 @@
     "Facebook Post": {
       "main": [
         []
+      ]
+    },
+    "Twitter Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -630,7 +683,7 @@
       "typeVersion": 2.2,
       "position": [
         -880,
-        112
+        -16
       ],
       "id": "ccfc3c6f-eaf8-49a6-8756-27276276f519",
       "name": "Linkedin Agent"
@@ -671,10 +724,10 @@
           "value": {
             "Topic": "={{ $('Google Sheets Trigger').item.json.Topic }}",
             "Date": "={{$now.format('dd-MM-yyyy T')}}",
-            "Instagram content": "={{ $json.output.post }}",
-            "Facebook Content": "={{ $json.output.post }}",
+            "Instagram content": "={{ $json.Instagram }}",
+            "Facebook Content": "={{ $json.Facebook }}",
             "Linkedin Content": "={{ $json.output.post }}",
-            "Image Link": "={{ $json.webViewLink }}",
+            "Image Link": "={{ $json.image }}",
             "Common": "={{ $json.output.post }}"
           },
           "matchingColumns": [
@@ -775,8 +828,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -32,
-        -48
+        -96,
+        192
       ],
       "id": "fa56c031-17cb-4db8-974e-5574883085a5",
       "name": "Append or update row in sheet",
@@ -802,8 +855,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        -496,
-        -64
+        -880,
+        416
       ],
       "id": "12af8262-3840-45d1-89e2-2a59380646a5",
       "name": "Generate an image",
@@ -827,7 +880,7 @@
       "typeVersion": 2.2,
       "position": [
         -880,
-        -192
+        -208
       ],
       "id": "b37acf25-f799-40fb-8803-4c7bc815d777",
       "name": "Facebook Post2",
@@ -924,8 +977,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -288,
-        -64
+        -704,
+        416
       ],
       "id": "1021c1bd-0887-4200-9712-cf145788a334",
       "name": "Upload file",
@@ -935,6 +988,99 @@
           "name": "Google Drive account"
         }
       }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Twitter post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 3-4 lines of informative content\n3.End with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for LinkedIn (not exeding 280 characters)\nNow, create a twitter post based on the following title:\n\n{{ $json.output }}\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -880,
+        192
+      ],
+      "id": "906859b8-085a-4016-ba24-293f15344130",
+      "name": "Twitter Agent"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "75766f1f-291d-40a1-bfcc-cd1e03621989",
+              "name": "twitter",
+              "value": "={{ $json.output.post }}",
+              "type": "string"
+            },
+            {
+              "id": "f2dea268-b858-482f-919e-af37eb4c2d10",
+              "name": "Facebook",
+              "value": "={{ $json.output.post }}",
+              "type": "string"
+            },
+            {
+              "id": "5f40c9a0-8e69-4efd-8f4f-d8e24329861a",
+              "name": "Linkedin",
+              "value": "={{ $json.output.post }}",
+              "type": "string"
+            },
+            {
+              "id": "e2c78125-5135-4a5e-9a7a-abd7dee83413",
+              "name": "Instagram",
+              "value": "={{ $json.output.post }}",
+              "type": "string"
+            },
+            {
+              "id": "25b6d2b9-1bab-4262-95a4-7657f52824a2",
+              "name": "image",
+              "value": "={{ $json.webViewLink }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -448,
+        192
+      ],
+      "id": "cbd2558b-5f35-4211-98e1-3854a3a6e005",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "any_event"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C06TEUDMRKL",
+          "mode": "list",
+          "cachedResultName": "dev"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        -256
+      ],
+      "id": "c786472d-834b-4086-aa8e-027b4d095ccf",
+      "name": "Slack Trigger",
+      "webhookId": "f7597fc0-6a8f-4e93-b2fc-b60b6f03abc6",
+      "credentials": {
+        "slackApi": {
+          "id": "MfBlO7dA4OQjwioO",
+          "name": "Slack account 4"
+        }
+      },
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -953,6 +1099,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-27T04:18:35.000Z",
-  "versionId": "f9a51909-2658-4498-ad66-5889b4d1d622"
+  "updatedAt": "2025-09-27T06:29:36.000Z",
+  "versionId": "e3e4a0c2-df34-45d4-99f9-86d258221cde"
 }
