@@ -1,0 +1,228 @@
+{
+  "active": false,
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-27T04:19:05.962Z",
+  "id": "bcfhUBbKr9xBFTI6",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 7",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Based on the following topic {{ $json.Topic }}, create tailored social media posts for\nLinkedIn, Instagram, Twitter (X), and Facebook. Each post should be formatted\nto suit the platform's tone, length, and audience expectations. Provide the output in\nseparate sections for each platform.\n\n- **LinkedIn**: A professional post that highlights the key insights of the article\nwith a formal tone, suitable for a business or professional audience.\n\n- **Instagram**: A short, visually engaging post with a call to action, using 2-3\nrelevant hashtags, formatted to fit Instagram's audience. The post should be concise\nbut engaging.\n\n- **Twitter (X)**: A concise post under 280 characters with up to 3 relevant hashtags.\nThe tone should be conversational and engaging.\n\n- **Facebook**: A friendly, conversational post that encourages interaction, with a\nbit more detail than Instagram and Twitter posts. Include a call to action and\nrelevant hashtags.\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        -160
+      ],
+      "id": "0f4d7dd1-4f41-4f82-9790-42dda0a2f9a0",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto",
+          "mode": "list",
+          "cachedResultName": "Devlomatix Solutions Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 27103859,
+          "mode": "list",
+          "cachedResultName": "SocialMediaPost",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit#gid=27103859"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -144
+      ],
+      "id": "f3ac9315-1f21-4f93-9c31-260fafd2d4b4",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "mAQDFzYBfDQLg2Qv",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67b38588-3e98-483d-9748-7955fa4e5130",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "Ready to Post",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        -144
+      ],
+      "id": "871c25f3-b147-4f30-9749-33af38317c22",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        48
+      ],
+      "id": "cddf2c89-27d6-416b-a696-b9822282e4ee",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "y8LeZoihkeXRP0IK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        272,
+        48
+      ],
+      "id": "fd3beef5-f804-460e-93b1-10c3bd5e0404",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "JgOFDGzcysLCyxsN",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"post\": {\n          \"facebook\":{\n\t\t\t\"type\": \"string\"\n    \t\t}\n        }\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        48
+      ],
+      "id": "6c8af6fc-a2db-42c1-a24b-43a503298da7",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-27T04:19:05.986Z",
+      "updatedAt": "2025-09-27T04:19:05.986Z",
+      "role": "workflow:owner",
+      "workflowId": "bcfhUBbKr9xBFTI6",
+      "projectId": "Jhxl57jBaP5qwf3G"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-27T04:26:57.000Z",
+  "versionId": "63d71f1a-7e98-43ba-8e26-f122529e52e2"
+}
