@@ -46,7 +46,7 @@
             "index": 0
           },
           {
-            "node": "Facebook Post2",
+            "node": "Facebook Agent",
             "type": "ai_languageModel",
             "index": 0
           },
@@ -93,7 +93,7 @@
             "index": 0
           },
           {
-            "node": "Facebook Post2",
+            "node": "Facebook Agent",
             "type": "ai_memory",
             "index": 0
           },
@@ -119,7 +119,7 @@
             "index": 0
           },
           {
-            "node": "Facebook Post2",
+            "node": "Facebook Agent",
             "type": "main",
             "index": 0
           },
@@ -140,7 +140,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -151,7 +151,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -172,7 +172,7 @@
             "index": 0
           },
           {
-            "node": "Facebook Post2",
+            "node": "Facebook Agent",
             "type": "ai_outputParser",
             "index": 0
           },
@@ -187,17 +187,6 @@
     "Append or update row in sheet": {
       "main": [
         []
-      ]
-    },
-    "Facebook Post2": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
-          }
-        ]
       ]
     },
     "Google Sheets Trigger": {
@@ -237,7 +226,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -253,7 +242,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -271,7 +260,7 @@
         ]
       ]
     },
-    "Edit Fields1": {
+    "Facebook Agent": {
       "main": [
         [
           {
@@ -724,11 +713,12 @@
           "value": {
             "Topic": "={{ $('Google Sheets Trigger').item.json.Topic }}",
             "Date": "={{$now.format('dd-MM-yyyy T')}}",
-            "Instagram content": "={{ $json.Instagram }}",
-            "Facebook Content": "={{ $json.Facebook }}",
+            "Instagram content": "={{ $json.output.post }}",
+            "Facebook Content": "={{ $json.output.post }}",
             "Linkedin Content": "={{ $json.output.post }}",
-            "Image Link": "={{ $json.image }}",
-            "Common": "={{ $json.output.post }}"
+            "Image Link": "={{ $json.webViewLink }}",
+            "Common": "={{ $json.output.post }}",
+            "X Content": "={{ $json.output.post }}"
           },
           "matchingColumns": [
             "Topic"
@@ -869,25 +859,6 @@
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "=You are a Facebook post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 2-4 paragraph of informative content\n3.\nEnd with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for Facebook (under 500 characters)\nNow, create a Facebook post based on the following title:\n\n{{ $json.output }}\n",
-        "hasOutputParser": true,
-        "options": {
-          "systemMessage": ""
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2.2,
-      "position": [
-        -880,
-        -208
-      ],
-      "id": "b37acf25-f799-40fb-8803-4c7bc815d777",
-      "name": "Facebook Post2",
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
         "pollTimes": {
           "item": [
             {
@@ -1007,53 +978,6 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "75766f1f-291d-40a1-bfcc-cd1e03621989",
-              "name": "twitter",
-              "value": "={{ $json.output.post }}",
-              "type": "string"
-            },
-            {
-              "id": "f2dea268-b858-482f-919e-af37eb4c2d10",
-              "name": "Facebook",
-              "value": "={{ $json.output.post }}",
-              "type": "string"
-            },
-            {
-              "id": "5f40c9a0-8e69-4efd-8f4f-d8e24329861a",
-              "name": "Linkedin",
-              "value": "={{ $json.output.post }}",
-              "type": "string"
-            },
-            {
-              "id": "e2c78125-5135-4a5e-9a7a-abd7dee83413",
-              "name": "Instagram",
-              "value": "={{ $json.output.post }}",
-              "type": "string"
-            },
-            {
-              "id": "25b6d2b9-1bab-4262-95a4-7657f52824a2",
-              "name": "image",
-              "value": "={{ $json.webViewLink }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -448,
-        192
-      ],
-      "id": "cbd2558b-5f35-4211-98e1-3854a3a6e005",
-      "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
         "trigger": [
           "any_event"
         ],
@@ -1081,6 +1005,25 @@
         }
       },
       "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Facebook post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 2-4 paragraph of informative content\n3.\nEnd with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for Facebook (under 500 characters)\nNow, create a Facebook post based on the following title:\n\n{{ $json.output }}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": ""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -880,
+        -208
+      ],
+      "id": "b37acf25-f799-40fb-8803-4c7bc815d777",
+      "name": "Facebook Agent",
+      "onError": "continueRegularOutput"
     }
   ],
   "pinData": {},
@@ -1099,6 +1042,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-27T06:29:36.000Z",
-  "versionId": "e3e4a0c2-df34-45d4-99f9-86d258221cde"
+  "updatedAt": "2025-09-27T06:47:23.000Z",
+  "versionId": "99506bd8-fc4c-4401-bd54-2edf34ff997e"
 }
