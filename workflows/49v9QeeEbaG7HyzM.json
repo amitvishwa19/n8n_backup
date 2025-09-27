@@ -1,0 +1,287 @@
+{
+  "active": false,
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Instagram",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Facebook",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Instagram",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Facebook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Facebook",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-27T09:26:39.622Z",
+  "id": "49v9QeeEbaG7HyzM",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 8",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto",
+          "mode": "list",
+          "cachedResultName": "Devlomatix Solutions Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 27103859,
+          "mode": "list",
+          "cachedResultName": "SocialMediaPost",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit#gid=27103859"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -944,
+        -208
+      ],
+      "id": "dd051042-ed7f-4a02-a89c-4b12cb2a47b4",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "mAQDFzYBfDQLg2Qv",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67b38588-3e98-483d-9748-7955fa4e5130",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "Ready to Post",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -720,
+        -208
+      ],
+      "id": "4367b0fb-e69d-4e50-b644-68a4a2a34778",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Google Sheets Trigger').item.json.Topic }}",
+        "options": {
+          "systemMessage": "=You are a helpful assistant,you have to create an article based on the input  in the format below\n\n\n#title\n#Description\n#Content\n\n\n\n\n{{ $json.chatInput }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -496,
+        -208
+      ],
+      "id": "8ed6b71d-8d55-438f-a5d9-ef006ef314ba",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        -672,
+        32
+      ],
+      "id": "684c8a56-7370-4682-a16b-cb94ec849959",
+      "name": "Mistral Cloud Chat Model",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "5QQUTnmDJlGi99qI",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        32
+      ],
+      "id": "48c4609a-6808-4cb9-aac9-a9cdc7e2b9fe",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "JgOFDGzcysLCyxsN",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"post\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -368,
+        32
+      ],
+      "id": "d00befd1-30e2-4e69-b249-bb4cdfe25350",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Instagram post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 3-4 lines of informative content\n3.\nEnd with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for LinkedIn (under 50 characters)\nNow, create a Instagram post based on the following title:\n\n{{ $json.output }}\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -160,
+        -496
+      ],
+      "id": "6c6783a5-4885-480c-84f0-5ddeb2c1433a",
+      "name": "Instagram"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Facebook post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 2-4 paragraph of informative content\n3.\nEnd with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for Facebook (under 500 characters)\nNow, create a Facebook post based on the following title:\n\n{{ $json.output }}\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -160,
+        -272
+      ],
+      "id": "c9c73d2d-6e54-453a-a5f9-8622865232ca",
+      "name": "Facebook"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-27T09:26:39.667Z",
+      "updatedAt": "2025-09-27T09:26:39.667Z",
+      "role": "workflow:owner",
+      "workflowId": "49v9QeeEbaG7HyzM",
+      "projectId": "Jhxl57jBaP5qwf3G"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-27T09:47:54.000Z",
+  "versionId": "71c681b8-e2a8-4948-9112-8dad28256ee1"
+}
