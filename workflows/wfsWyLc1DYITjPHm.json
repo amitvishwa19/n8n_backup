@@ -112,6 +112,11 @@
             "node": "Generate an image",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -217,6 +222,11 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "Facebook Post": {
+      "main": [
+        []
       ]
     }
   },
@@ -347,11 +357,11 @@
             "parameter": [
               {
                 "name": "message",
-                "value": "This is a facebook test post via n8n"
+                "value": "={{ $json['Facebook Content'] }}"
               },
               {
                 "name": "url",
-                "value": "={{ $json.image_url }}"
+                "value": "=https://2ysdv7kqqjhyq5jp.public.blob.vercel-storage.com/anshu-3-YDP7nPNr0ZX0HuCAKRhpRux7NqAaE8"
               }
             ]
           }
@@ -431,7 +441,7 @@
       "parameters": {
         "postAs": "organization",
         "organization": "109130964",
-        "text": "={{ $json.output.post }}",
+        "text": "={{ $json['Linkedin Content'] }}",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.linkedIn",
@@ -664,7 +674,8 @@
             "Instagram content": "={{ $json.output.post }}",
             "Facebook Content": "={{ $json.output.post }}",
             "Linkedin Content": "={{ $json.output.post }}",
-            "Image Link": "={{ $json.webViewLink }}"
+            "Image Link": "={{ $json.webViewLink }}",
+            "Common": "={{ $json.output.post }}"
           },
           "matchingColumns": [
             "Topic"
@@ -746,14 +757,14 @@
               "removed": true
             },
             {
-              "id": "Preview",
-              "displayName": "Preview",
+              "id": "Common",
+              "displayName": "Common",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true,
-              "removed": true
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -764,8 +775,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        48,
-        336
+        -32,
+        -48
       ],
       "id": "fa56c031-17cb-4db8-974e-5574883085a5",
       "name": "Append or update row in sheet",
@@ -942,6 +953,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T07:43:49.000Z",
-  "versionId": "8f7294da-3c2a-4ee0-9065-2e9d2e7cf4b1"
+  "updatedAt": "2025-09-27T04:18:35.000Z",
+  "versionId": "f9a51909-2658-4498-ad66-5889b4d1d622"
 }
