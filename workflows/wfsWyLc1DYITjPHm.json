@@ -226,7 +226,7 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Edit Fields1",
             "type": "main",
             "index": 0
           }
@@ -261,6 +261,17 @@
       ]
     },
     "Facebook Agent": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
       "main": [
         [
           {
@@ -315,8 +326,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1344,
-        -592
+        -432,
+        -384
       ],
       "id": "6d26ed6b-002d-45c2-bced-04cca22974ca",
       "name": "Edit Fields"
@@ -483,7 +494,7 @@
       "parameters": {
         "postAs": "organization",
         "organization": "109130964",
-        "text": "={{ $json['Linkedin Content'] }}",
+        "text": "={{ $json.output.post }}",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.linkedIn",
@@ -716,7 +727,7 @@
             "Instagram content": "={{ $json.output.post }}",
             "Facebook Content": "={{ $json.output.post }}",
             "Linkedin Content": "={{ $json.output.post }}",
-            "Image Link": "={{ $json.webViewLink }}",
+            "Image Link": "={{ $json.image_url }}",
             "Common": "={{ $json.output.post }}",
             "X Content": "={{ $json.output.post }}"
           },
@@ -963,7 +974,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are a Twitter post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 3-4 lines of informative content\n3.End with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for LinkedIn (not exeding 280 characters)\nNow, create a twitter post based on the following title:\n\n{{ $json.output }}\n",
+        "text": "=You are a Twitter post writer. You will be given a title and your task is to\ncreate an engaging Instagram post based on that title.\n\nYour post should:\n1. Begin with a compelling hook related to the title\n2. Include 3-4 lines of informative content\n3.End with a question to encourage engagement\n4. Include 4-6 relevant hashtags\n5. Use appropiate emojis in between\nImportant formatting requirements:\n- Format all paragraphs with proper newline characters (\\n\\n) between them\n- Ensure the text is properly escaped for JSON\n- Do not use double quote (**) in response od any special character\n- Do not put asterisk\n- Keep the overall length appropriate for LinkedIn (not exeding 100 characters)\nNow, create a twitter post based on the following title:\n\n{{ $json.output }}\n",
         "hasOutputParser": true,
         "options": {}
       },
@@ -1024,6 +1035,29 @@
       "id": "b37acf25-f799-40fb-8803-4c7bc815d777",
       "name": "Facebook Agent",
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "59012ed2-2d63-436b-9b32-178c78feb20e",
+              "name": "image_url",
+              "value": "={{ $json.webViewLink }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -496,
+        416
+      ],
+      "id": "bc6b8f3e-8464-40d6-b8cc-5759bc3b75fb",
+      "name": "Edit Fields1"
     }
   ],
   "pinData": {},
@@ -1042,6 +1076,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-27T06:47:23.000Z",
-  "versionId": "99506bd8-fc4c-4401-bd54-2edf34ff997e"
+  "updatedAt": "2025-09-27T09:56:57.000Z",
+  "versionId": "c3a49369-5cf3-418d-830b-56ba5e4690c6"
 }
