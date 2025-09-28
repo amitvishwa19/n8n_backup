@@ -138,24 +138,12 @@
     },
     "Instagram agent": {
       "main": [
-        [
-          {
-            "node": "Append or update row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Linkedin Agent": {
       "main": [
-        [
-          {
-            "node": "Append or update row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Structured Output Parser": {
@@ -202,13 +190,7 @@
     },
     "If": {
       "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Generate an image": {
@@ -240,42 +222,29 @@
     },
     "Twitter Agent": {
       "main": [
-        [
-          {
-            "node": "Append or update row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Slack Trigger": {
       "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Facebook Agent": {
       "main": [
-        [
-          {
-            "node": "Append or update row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Edit Fields1": {
       "main": [
+        []
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "AI Agent",
             "type": "main",
             "index": 0
           }
@@ -326,8 +295,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -432,
-        -384
+        -96,
+        -400
       ],
       "id": "6d26ed6b-002d-45c2-bced-04cca22974ca",
       "name": "Edit Fields"
@@ -567,7 +536,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $json.Topic }}",
+        "text": "={{ $json.message.text }}",
         "options": {
           "systemMessage": "=You are a helpful assistant,you have to create an article based on the input  in the format below\n\n\n#title\n#Description\n#Content\n\n\n\n\n{{ $json.chatInput }}"
         }
@@ -846,9 +815,9 @@
         "resource": "image",
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-2.0-flash-preview-image-generation",
+          "value": "models/gemini-2.0-flash-exp-image-generation",
           "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-preview-image-generation"
+          "cachedResultName": "models/gemini-2.0-flash-exp-image-generation"
         },
         "prompt": "=Create an image based on the topic , it should be realistic\n{{ $json.output }}\n",
         "options": {}
@@ -896,8 +865,8 @@
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        -1776,
-        -48
+        -1936,
+        -272
       ],
       "id": "d0a616d2-4abb-4461-b2f1-0b3eecd49885",
       "name": "Google Sheets Trigger",
@@ -935,8 +904,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -1600,
-        -48
+        -1728,
+        -384
       ],
       "id": "4bb722aa-5248-4bd7-90cf-497ac13026aa",
       "name": "If"
@@ -1003,8 +972,8 @@
       "type": "n8n-nodes-base.slackTrigger",
       "typeVersion": 1,
       "position": [
-        -1600,
-        -256
+        -1584,
+        -288
       ],
       "id": "c786472d-834b-4086-aa8e-027b4d095ccf",
       "name": "Slack Trigger",
@@ -1058,6 +1027,29 @@
       ],
       "id": "bc6b8f3e-8464-40d6-b8cc-5759bc3b75fb",
       "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1504,
+        -64
+      ],
+      "id": "45192126-a1fe-4e4b-81a7-546fad00562d",
+      "name": "Telegram Trigger",
+      "webhookId": "b937c87e-022e-4632-b469-2b548d074718",
+      "credentials": {
+        "telegramApi": {
+          "id": "TUz6qSgwbqxaCtTo",
+          "name": "Telegram account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1076,6 +1068,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-27T09:56:57.000Z",
-  "versionId": "c3a49369-5cf3-418d-830b-56ba5e4690c6"
+  "updatedAt": "2025-09-28T06:02:05.000Z",
+  "versionId": "98a7cf76-d4e6-422f-b40a-d366113db965"
 }
