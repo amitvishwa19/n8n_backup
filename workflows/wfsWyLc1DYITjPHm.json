@@ -127,11 +127,6 @@
             "node": "Twitter Agent",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Generate an image",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -190,7 +185,13 @@
     },
     "If": {
       "main": [
-        []
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Generate an image": {
@@ -242,13 +243,7 @@
     },
     "Telegram Trigger": {
       "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -865,8 +860,8 @@
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        -1936,
-        -272
+        -1696,
+        -48
       ],
       "id": "d0a616d2-4abb-4461-b2f1-0b3eecd49885",
       "name": "Google Sheets Trigger",
@@ -904,8 +899,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -1728,
-        -384
+        -1536,
+        -48
       ],
       "id": "4bb722aa-5248-4bd7-90cf-497ac13026aa",
       "name": "If"
@@ -972,8 +967,8 @@
       "type": "n8n-nodes-base.slackTrigger",
       "typeVersion": 1,
       "position": [
-        -1584,
-        -288
+        -1216,
+        -416
       ],
       "id": "c786472d-834b-4086-aa8e-027b4d095ccf",
       "name": "Slack Trigger",
@@ -1038,8 +1033,8 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -1504,
-        -64
+        -1440,
+        -432
       ],
       "id": "45192126-a1fe-4e4b-81a7-546fad00562d",
       "name": "Telegram Trigger",
@@ -1049,7 +1044,8 @@
           "id": "TUz6qSgwbqxaCtTo",
           "name": "Telegram account"
         }
-      }
+      },
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -1068,6 +1064,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-28T06:02:05.000Z",
-  "versionId": "98a7cf76-d4e6-422f-b40a-d366113db965"
+  "updatedAt": "2025-09-28T13:51:48.000Z",
+  "versionId": "e97a5492-b77a-41bd-8cc9-a76b594f2ad1"
 }
