@@ -1,0 +1,156 @@
+{
+  "active": false,
+  "connections": {
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model in Perplexity": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-28T05:46:12.806Z",
+  "id": "Kk0oiyCJMEGyPQcw",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 9",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -304,
+        -176
+      ],
+      "id": "a30b9f85-3e43-427a-a659-62d019808428",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        96
+      ],
+      "id": "73c15df4-1c1a-43dd-a02c-dfcf80dd749d",
+      "name": "Mistral Cloud Chat Model",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "5QQUTnmDJlGi99qI",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "sonar",
+        "messages": {
+          "message": [
+            {
+              "content": "={{ $json.chatInput }}"
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexityTool",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        144
+      ],
+      "id": "eee18a22-9b8e-4f6a-acd2-28f6e64aa4e1",
+      "name": "Message a model in Perplexity",
+      "credentials": {
+        "perplexityApi": {
+          "id": "rdvb0cNR2XmHAyAr",
+          "name": "Perplexity account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "message",
+          "any_event",
+          "app_mention"
+        ],
+        "watchWorkspace": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -160
+      ],
+      "id": "61f60d5d-de50-44dc-8631-440dfe461a63",
+      "name": "Slack Trigger",
+      "webhookId": "ad80d18d-4c03-48e7-8064-5ff36d5dca0a",
+      "credentials": {
+        "slackApi": {
+          "id": "MfBlO7dA4OQjwioO",
+          "name": "Slack account 4"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-28T05:46:12.812Z",
+      "updatedAt": "2025-09-28T05:46:12.812Z",
+      "role": "workflow:owner",
+      "workflowId": "Kk0oiyCJMEGyPQcw",
+      "projectId": "Jhxl57jBaP5qwf3G"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-28T05:59:11.000Z",
+  "versionId": "4db421da-c6c7-4f8c-8aca-dcf30a547b8d"
+}
