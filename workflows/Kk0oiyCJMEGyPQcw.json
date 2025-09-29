@@ -56,13 +56,13 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $json.ai_overview }}",
+        "text": "={{ $json.ai_overview.text_blocks[0].answer }}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        -800,
+        -960,
         -160
       ],
       "id": "a30b9f85-3e43-427a-a659-62d019808428",
@@ -75,8 +75,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
       "typeVersion": 1,
       "position": [
-        -800,
-        80
+        -960,
+        48
       ],
       "id": "73c15df4-1c1a-43dd-a02c-dfcf80dd749d",
       "name": "Mistral Cloud Chat Model",
@@ -172,6 +172,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-28T14:20:31.000Z",
-  "versionId": "9fa158f1-128d-48c0-b0e3-c9ad04426a7e"
+  "updatedAt": "2025-09-29T05:48:09.000Z",
+  "versionId": "5a44ecaf-685a-473a-ba3d-bed1e8949bb8"
 }
