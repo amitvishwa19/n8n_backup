@@ -1014,12 +1014,12 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": [
-        12
+        14
       ]
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-09-30T06:54:13.000Z",
+  "updatedAt": "2025-09-30T06:54:58.000Z",
   "versionId": "45cc4720-51fd-40d1-9123-dc21b768c9c0"
 }
