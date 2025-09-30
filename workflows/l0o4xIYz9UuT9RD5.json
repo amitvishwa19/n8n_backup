@@ -118,12 +118,12 @@
       "main": [
         [
           {
-            "node": "Check for Readme",
+            "node": "Code in JavaScript",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Code in JavaScript",
+            "node": "Check for Readme",
             "type": "main",
             "index": 0
           }
@@ -965,8 +965,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        64,
-        -80
+        1104,
+        48
       ],
       "id": "dd50287d-04da-40f3-95eb-eff98e495d6a",
       "name": "Send Success Message",
@@ -985,8 +985,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -160,
-        -80
+        160,
+        48
       ],
       "id": "d1cde191-b237-4c49-988f-d872f5176a7c",
       "name": "Code in JavaScript"
@@ -1014,6 +1014,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-09-30T06:52:08.000Z",
-  "versionId": "ddb1cf9b-2f27-4edd-a901-59279ae217b1"
+  "updatedAt": "2025-09-30T06:53:27.000Z",
+  "versionId": "8ff68e13-705d-416c-b8df-4a5f6418eb06"
 }
