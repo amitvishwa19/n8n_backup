@@ -121,11 +121,6 @@
             "node": "Check for Readme",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Send Success Message",
-            "type": "main",
-            "index": 0
           }
         ],
         [
@@ -260,6 +255,28 @@
         [
           {
             "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Readme": {
+      "main": [
+        [
+          {
+            "node": "Send Success Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Readme": {
+      "main": [
+        [
+          {
+            "node": "Send Success Message",
             "type": "main",
             "index": 0
           }
@@ -910,7 +927,7 @@
       "parameters": {
         "content": "## Check github for Readme file and create or update\n",
         "height": 416,
-        "width": 752,
+        "width": 1136,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -938,8 +955,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        -208,
-        -80
+        1088,
+        64
       ],
       "id": "dd50287d-04da-40f3-95eb-eff98e495d6a",
       "name": "Send Success Message",
@@ -972,6 +989,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-09-24T07:11:12.000Z",
-  "versionId": "5a782c80-f9a3-41fd-96e0-edeb517953f7"
+  "updatedAt": "2025-09-30T06:23:20.000Z",
+  "versionId": "d4c56e94-02cc-466c-89a4-3e95e5a1653d"
 }
