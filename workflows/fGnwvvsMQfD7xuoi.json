@@ -292,7 +292,9 @@
   "createdAt": "2025-10-03T05:47:21.115Z",
   "id": "fGnwvvsMQfD7xuoi",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Workflow Backup v2",
   "nodes": [
     {
@@ -582,7 +584,7 @@
           "interval": [
             {
               "field": "hours",
-              "hoursInterval": 2
+              "hoursInterval": 12
             }
           ]
         }
@@ -624,6 +626,12 @@
       "webhookId": "743111c3-2c21-4658-8097-a9fe966f43d2",
       "typeVersion": 1,
       "alwaysOutputData": true,
+      "credentials": {
+        "githubApi": {
+          "id": "pIwtQRU9cVvbgSTE",
+          "name": "GitHub account"
+        }
+      },
       "continueOnFail": true
     },
     {
@@ -1000,6 +1008,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-03T06:41:31.000Z",
-  "versionId": "aee1d930-6477-4a93-bbb4-1632b0305d10"
+  "updatedAt": "2025-10-03T06:44:19.000Z",
+  "versionId": "c46b2a03-3181-40fd-a87f-1ac195b656db"
 }
