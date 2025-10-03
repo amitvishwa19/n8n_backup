@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "n8n": {
       "main": [
@@ -268,6 +268,16 @@
     },
     "Edit Readme": {
       "main": [
+        []
+      ]
+    },
+    "Create Readme": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
         [
           {
             "node": "Send Success Message",
@@ -277,11 +287,11 @@
         ]
       ]
     },
-    "Create Readme": {
+    "Slack Trigger": {
       "main": [
         [
           {
-            "node": "Send Success Message",
+            "node": "n8n",
             "type": "main",
             "index": 0
           }
@@ -303,8 +313,8 @@
       "name": "On clicking 'execute'",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        -960,
-        -464
+        -976,
+        -512
       ],
       "typeVersion": 1
     },
@@ -317,7 +327,7 @@
       "name": "n8n",
       "type": "n8n-nodes-base.n8n",
       "position": [
-        -704,
+        -416,
         -368
       ],
       "typeVersion": 1,
@@ -570,7 +580,7 @@
       "name": "Loop Over Items",
       "type": "n8n-nodes-base.splitInBatches",
       "position": [
-        -496,
+        -208,
         -368
       ],
       "typeVersion": 3,
@@ -593,8 +603,8 @@
       "name": "Schedule Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
-        -960,
-        -272
+        -976,
+        -384
       ],
       "typeVersion": 1.2
     },
@@ -720,7 +730,7 @@
       "name": "Execute Workflow",
       "type": "n8n-nodes-base.executeWorkflow",
       "position": [
-        -272,
+        16,
         -352
       ],
       "typeVersion": 1.2
@@ -744,8 +754,8 @@
     {
       "parameters": {
         "content": "## Main workflow loop",
-        "height": 435,
-        "width": 1030,
+        "height": 419,
+        "width": 1286,
         "color": 7
       },
       "id": "e8d8df70-91b0-4568-83f3-4fb881c8c544",
@@ -753,7 +763,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -1008,
-        -544
+        -528
       ],
       "typeVersion": 1
     },
@@ -818,7 +828,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        384,
+        576,
         -384
       ],
       "id": "314b0fe4-5013-45b0-8ef2-fce31fa4dcb3",
@@ -847,7 +857,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        224,
+        416,
         -384
       ],
       "id": "a51040af-71a1-49bb-8d2f-763f72c4e9af",
@@ -882,7 +892,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        608,
+        800,
         -272
       ],
       "id": "89e5c4b2-0692-433b-a0f6-924a1b054188",
@@ -918,7 +928,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        608,
+        800,
         -448
       ],
       "id": "449c0a57-3c84-4726-9b65-2e45fbb9b984",
@@ -936,12 +946,12 @@
       "parameters": {
         "content": "## Check github for Readme file and create or update\n",
         "height": 416,
-        "width": 1008,
+        "width": 720,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        64,
+        352,
         -528
       ],
       "typeVersion": 1,
@@ -965,8 +975,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        832,
-        -384
+        48,
+        -496
       ],
       "id": "93ed6535-bf81-47fe-9b1b-05905c56bc0d",
       "name": "Send Success Message",
@@ -985,11 +995,40 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -112,
-        -384
+        -208,
+        -496
       ],
       "id": "157643ac-420f-46c1-813d-9f7daef5c2e6",
       "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "any_event"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C09DPF7DS2V",
+          "mode": "list",
+          "cachedResultName": "dev-n8n"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        -240
+      ],
+      "id": "24a433a8-46cd-4b15-97e7-317d0224f486",
+      "name": "Slack Trigger",
+      "webhookId": "af7d3b23-ef54-42c6-83b2-e9ee74a9ee72",
+      "credentials": {
+        "slackApi": {
+          "id": "WI0VJ7cnXk6TFCHK",
+          "name": "Slack account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1005,9 +1044,13 @@
       "projectId": "hWHkhBemod06cHxZ"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-10-03T06:44:19.000Z",
-  "versionId": "c46b2a03-3181-40fd-a87f-1ac195b656db"
+  "triggerCount": 2,
+  "updatedAt": "2025-10-03T06:52:11.000Z",
+  "versionId": "f6de4882-01fd-4dbf-91ff-60d987e2602b"
 }
