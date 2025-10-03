@@ -1,0 +1,28 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-10-03T05:49:50.843Z",
+  "id": "UXJd7FXIQTO0yGi2",
+  "isArchived": false,
+  "meta": null,
+  "name": "Voice Assistant",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-03T05:49:50.846Z",
+      "updatedAt": "2025-10-03T05:49:50.846Z",
+      "role": "workflow:owner",
+      "workflowId": "UXJd7FXIQTO0yGi2",
+      "projectId": "hWHkhBemod06cHxZ"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-03T05:49:50.843Z",
+  "versionId": "58f92a21-63da-42e4-bc57-799b7095cc9a"
+}
