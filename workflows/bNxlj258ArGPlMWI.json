@@ -609,7 +609,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer"
+              "value": "Bearer  key_8edab34a4ed31faaeb930d1d472f5338d151b0d601734fe2350770307c4247a7e091851beb183c9f3cb0d1907ce75d305543fe4d82ae8f5cf4c5fcabafe41182"
             },
             {
               "name": "X-Runway-Version",
@@ -983,7 +983,13 @@
         416
       ],
       "id": "6c05c609-af47-4fb0-96f4-7ef780132530",
-      "name": "Google Gemini Chat Model2"
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "iw19guNKwTtfLMtO",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1002,6 +1008,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-03T07:18:02.000Z",
-  "versionId": "babf0049-53a4-4da5-9a73-aa45c837ea99"
+  "updatedAt": "2025-10-03T07:25:45.000Z",
+  "versionId": "1e49a065-31d4-464c-9be3-efa43dc0d634"
 }
