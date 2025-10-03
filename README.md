@@ -1,9 +1,9 @@
 # N8N Workflow Backup - 
-This folder contains the backup of all N8N workflows as of 01-10-2025
+This folder contains the backup of all N8N workflows as of 03-10-2025
 
 ## Backup Details
-- Backup Time: 01-10-2025 10:01
-- Total Workflows: 19
+- Backup Time: 03-10-2025 12:09
+- Total Workflows: 9
 
 ## Files
 Each workflow is saved as a separate JSON file with the format
