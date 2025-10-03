@@ -1,0 +1,411 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get many workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many workflows": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Check for Readme",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for Readme": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit a file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-03T05:50:19.503Z",
+  "id": "r26PEy1MXTXbeF2G",
+  "isArchived": false,
+  "meta": null,
+  "name": "Workflow Auto Backup",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1056,
+        -80
+      ],
+      "id": "8a6e7d73-24df-423e-a8a8-559b565f8550",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        -832,
+        -80
+      ],
+      "id": "7f60e2df-61a6-468d-934f-b334db5305b7",
+      "name": "Get many workflows"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -624,
+        -80
+      ],
+      "id": "b03469a8-51ac-4f02-9a09-d418942e8e96",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto",
+          "mode": "list",
+          "cachedResultName": "Devlomatix Solutions Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1875220372,
+          "mode": "list",
+          "cachedResultName": "Workflow Backup Logs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit#gid=1875220372"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Workflow": "={{ $json.name }}",
+            "Date Time": "={{ $now.format('dd-MM-yyyy T') }}"
+          },
+          "matchingColumns": [
+            "Workflow"
+          ],
+          "schema": [
+            {
+              "id": "Date Time",
+              "displayName": "Date Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Folder Name",
+              "displayName": "Folder Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Workflow",
+              "displayName": "Workflow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -336,
+        16
+      ],
+      "id": "42e405ce-0934-4739-bda3-13137dd4ff07",
+      "name": "Append or update row in sheet"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "amitvishwa19",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n_backup",
+          "mode": "list",
+          "cachedResultName": "n8n_backup",
+          "cachedResultUrl": "https://github.com/amitvishwa19/n8n_backup"
+        },
+        "filePath": "README.md",
+        "fileContent": "=# N8N Workflow Backup - \nThis folder contains the backup of all N8N workflows as of {{$now.setZone ('Asia/Kolkata').format('dd-MM-yyyy') }}\n\n## Backup Details\n- Backup Time: {{ $now.format('dd-MM-yyyy T') }}\n- Total Workflows: {{ $('Get many workflows').all().length }}\n\n## Files\nEach workflow is saved as a separate JSON file with the format\n\n-----------\n* Automatically generated by NSN Backup Workflow *",
+        "commitMessage": "asassas"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        16
+      ],
+      "id": "5138a100-6a04-4e88-b6db-156a716963c3",
+      "name": "Create a file",
+      "webhookId": "b33de990-e692-4041-9882-ac12218cab02"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.name }}",
+                    "rightValue": "README.md",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "c2d50d90-665c-424c-866a-f3fd0cf02077"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Readme Exists"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8ef92f85-55f7-4850-8369-8dd23302c292",
+                    "leftValue": "={{ $json.name }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notExists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No Readme"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        352,
+        -96
+      ],
+      "id": "6a3aec6a-584f-4326-830a-a50f552696de",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "amitvishwa19",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n_backup",
+          "mode": "list",
+          "cachedResultName": "n8n_backup",
+          "cachedResultUrl": "https://github.com/amitvishwa19/n8n_backup"
+        },
+        "filePath": "README.md",
+        "asBinaryProperty": false,
+        "additionalParameters": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        -96
+      ],
+      "id": "1f176708-170d-498b-b93b-3a931824d143",
+      "name": "Check for Readme",
+      "webhookId": "b12c4a0c-f6c0-46fb-996f-9968bde50316"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "amitvishwa19",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n_backup",
+          "mode": "list",
+          "cachedResultName": "n8n_backup",
+          "cachedResultUrl": "https://github.com/amitvishwa19/n8n_backup"
+        },
+        "filePath": "README.md",
+        "fileContent": "=# N8N Workflow Backup - \nThis folder contains the backup of all N8N workflows as of {{$now.setZone ('Asia/Kolkata').format('dd-MM-yyyy') }}\n\n## Backup Details\n- Backup Time: {{ $now.format('dd-MM-yyyy T') }}\n- Total Workflows: {{ $('Get many workflows').all().length }}\n\n## Files\nEach workflow is saved as a separate JSON file with the format\n\n-----------\n* Automatically generated by NSN Backup Workflow *",
+        "commitMessage": "New Backup"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        -112
+      ],
+      "id": "a714a062-9741-4db7-8485-498328c99c14",
+      "name": "Edit a file",
+      "webhookId": "4edbb934-e752-46b4-99b6-3f484e780c01"
+    },
+    {
+      "parameters": {
+        "content": "Check github for Readme file and create or update\n",
+        "height": 336,
+        "width": 736,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        112,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "8e2dad5f-1f8c-4365-ad73-55d845e22ad5",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-03T05:50:19.507Z",
+      "updatedAt": "2025-10-03T05:50:19.507Z",
+      "role": "workflow:owner",
+      "workflowId": "r26PEy1MXTXbeF2G",
+      "projectId": "hWHkhBemod06cHxZ"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-03T05:50:19.503Z",
+  "versionId": "b75c7381-2b78-419b-8f4e-b7dacba12040"
+}
