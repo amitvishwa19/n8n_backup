@@ -277,8 +277,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1040,
-        -112
+        -1072,
+        -192
       ],
       "id": "7590cb47-9ead-436a-b711-6d8ffef414b6",
       "name": "When clicking ‘Test workflow’"
@@ -296,15 +296,15 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -1040,
-        -288
+        -1072,
+        -320
       ],
       "id": "259dcb4f-e239-48b6-a162-192e0b6cf7d8",
       "name": "Schedule Trigger1"
     },
     {
       "parameters": {
-        "jsCode": "// Get all incoming items\nconst items = $input.all();\n\n// Extract the text field from each item\nconst texts = items.map(item => item.json.title);\n\n// Concatenate them (adjust the separator as needed)\nconst concatenated = texts.join(\", \");\n\n// Return a single item with the concatenated text\nreturn [{ json: { mergedText: concatenated } }];"
+        "jsCode": "// Get all incoming items\nconst items = $input.all();\n\n// Extract the text field from each item\nconst texts = items.map(item => item.json.Topic);\n\n// Concatenate them (adjust the separator as needed)\nconst concatenated = texts.join(\", \");\n\n// Return a single item with the concatenated text\nreturn [{ json: { mergedText: concatenated } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -347,9 +347,9 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Generate an idea for a new video to produce.\n\nHere are the ideas that we've already used: {{ $json.mergedText }}\n\nGive me one new, super viral idea, present it as 5-7 words:",
+        "text": "=Generate an idea for a new video to produce.\n\nHere are the ideas that we've already used: {{ $json.mergedText }}\nGive me one new, super viral idea, present it as 5-7 words:",
         "options": {
-          "systemMessage": "=You're an expert in viral content creation with 5 years of experience.\n\nYou've created viral short videos that have gotten 10 billion views in total.\n\nYou specilize in short AI-generated videos with epic scenes, with well-known countries presidents and cultural things that the majority of people knows.\n\nExamples of videos that you did:\n- Countries as presidents bodybuilders💪🏻 (showing scenes how Donald Trump is working out with Arnold Schwarznegger, then how Putin works out with Arnold, then how French president and so on)\n- Countries as presidents rockstars🤘 (showing major presidents one by one on the scene as rock artists)\n- Countries as presidents Kaiju💀 (showing presidents as huge giants walking in water and showing their power)\n- And many more in the same style\n"
+          "systemMessage": "=You're an expert in viral content creation with 5 years of experience.\n\nYou've created viral short videos that have gotten 10 billion views in total.\n\nYou specilize in short AI-generated videos with epic scenes, with topic {{ $('Get Existing Ideas').item.json.Topic }}\n\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -398,17 +398,25 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "1J_bgTio5aBowvcIyKpfJvTROMEg9JLcfaOt34kRCD9g",
+          "value": "1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto",
           "mode": "list",
-          "cachedResultName": "Short Videos System",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1J_bgTio5aBowvcIyKpfJvTROMEg9JLcfaOt34kRCD9g/edit?usp=drivesdk"
+          "cachedResultName": "Devlomatix Solutions Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": "gid=0",
+          "value": 27103859,
           "mode": "list",
-          "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1J_bgTio5aBowvcIyKpfJvTROMEg9JLcfaOt34kRCD9g/edit#gid=0"
+          "cachedResultName": "SocialMediaPost",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ChtHTAYyiLYk7ZzouswoNRH2TkvVAoGT55nDu5DpAto/edit#gid=27103859"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Ready to Post"
+            }
+          ]
         },
         "options": {}
       },
@@ -421,7 +429,13 @@
       "id": "14c5b1c7-a906-48c8-a2d7-9788e7527e6e",
       "name": "Get Existing Ideas",
       "executeOnce": true,
-      "alwaysOutputData": true
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "t919PiJpUuMhZcRL",
+          "name": "Google Sheets account"
+        }
+      }
     },
     {
       "parameters": {
@@ -900,11 +914,17 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -592,
-        -96
+        -576,
+        -32
       ],
       "id": "e835c414-39fd-4122-bdee-f4a5105f90c5",
-      "name": "Google Gemini Chat Model"
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "iw19guNKwTtfLMtO",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -913,11 +933,17 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        176,
-        -80
+        160,
+        -32
       ],
       "id": "d01ab3bf-3c56-4bcf-be46-54cbf705a35a",
-      "name": "Google Gemini Chat Model1"
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "iw19guNKwTtfLMtO",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -938,7 +964,13 @@
         -240
       ],
       "id": "9ecbc598-b134-4f5e-9846-f19a573531ec",
-      "name": "Generate an image"
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "iw19guNKwTtfLMtO",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -970,6 +1002,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-03T05:48:40.687Z",
-  "versionId": "142f1fe6-0df7-4e83-bd6a-31e6e9aa986a"
+  "updatedAt": "2025-10-03T07:18:02.000Z",
+  "versionId": "babf0049-53a4-4da5-9a73-aa45c837ea99"
 }
