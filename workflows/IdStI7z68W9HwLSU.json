@@ -1,0 +1,72 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-04T05:44:13.121Z",
+  "id": "IdStI7z68W9HwLSU",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "26dcdbad-8e5d-4004-87e7-8a362b1a69b7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "UAtV4uiLDmnMyLRs",
+          "mode": "list",
+          "cachedResultName": "test",
+          "cachedResultUrl": "/projects/hWHkhBemod06cHxZ/datatables/UAtV4uiLDmnMyLRs"
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "eecc0746-662d-47db-bf3c-abedbe5ef86d",
+      "name": "Get row(s)"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-04T05:44:13.127Z",
+      "updatedAt": "2025-10-04T05:44:13.127Z",
+      "role": "workflow:owner",
+      "workflowId": "IdStI7z68W9HwLSU",
+      "projectId": "hWHkhBemod06cHxZ"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-04T05:44:13.121Z",
+  "versionId": "bac7474b-7fb2-47e8-ac89-0383c0d6f219"
+}
